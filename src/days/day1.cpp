@@ -31,7 +31,6 @@ int add_line(const std::string& line, bool allow_alpha)
     }
     
     std::string digit = digits[first_digit % 9] + digits[last_digit % 9];
-    std::cout << digit << std::endl;
     return atoi(digit.c_str());
 }
 
