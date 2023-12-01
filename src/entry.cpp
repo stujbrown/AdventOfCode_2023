@@ -1,5 +1,5 @@
 #include "entry.hpp"
-#include "days/days.hpp"
+#include "days/aoc_days.hpp"
 
 #include <stdlib.h>
 #include <fstream>

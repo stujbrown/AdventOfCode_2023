@@ -80,7 +80,7 @@
 		D6AFFF002B137BB700F7DFEB /* entry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = entry.cpp; sourceTree = "<group>"; };
 		D6AFFF012B137BB700F7DFEB /* entry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = entry.hpp; sourceTree = "<group>"; };
 		D6AFFF032B137CB900F7DFEB /* day1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = day1.cpp; sourceTree = "<group>"; };
-		D6AFFF052B137DF400F7DFEB /* days.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = days.hpp; sourceTree = "<group>"; };
+		D6AFFF052B137DF400F7DFEB /* aoc_days.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = aoc_days.hpp; sourceTree = "<group>"; };
 		D6AFFF0D2B1384F700F7DFEB /* day3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = day3.txt; sourceTree = "<group>"; };
 		D6AFFF0E2B1384F700F7DFEB /* day24.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = day24.txt; sourceTree = "<group>"; };
 		D6AFFF0F2B1384F700F7DFEB /* day22.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = day22.txt; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				D6AFFF032B137CB900F7DFEB /* day1.cpp */,
-				D6AFFF052B137DF400F7DFEB /* days.hpp */,
+				D6AFFF052B137DF400F7DFEB /* aoc_days.hpp */,
 			);
 			path = days;
 			sourceTree = "<group>";
