@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+*.xcworkspacedata
+AdventOfCode_2023.xcodeproj/project.xcworkspace/xcuserdata/
+AdventOfCode_2023.xcodeproj/xcuserdata/
+AdventOfCode_2023.xcodeproj/project.xcworkspace/xcshareddata/
