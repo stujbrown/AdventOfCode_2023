@@ -98,7 +98,7 @@
 		D6AFFF1B2B1384F800F7DFEB /* day8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = day8.txt; sourceTree = "<group>"; };
 		D6AFFF1C2B1384F800F7DFEB /* day20.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = day20.txt; sourceTree = "<group>"; };
 		D6AFFF1D2B1384F800F7DFEB /* day2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = day2.txt; sourceTree = "<group>"; };
-		D6AFFF1E2B1384F800F7DFEB /* day1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = day1.txt; sourceTree = "<group>"; };
+		D6AFFF1E2B1384F800F7DFEB /* day1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = day1.txt; sourceTree = "<group>"; };
 		D6AFFF1F2B1384F800F7DFEB /* day17.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = day17.txt; sourceTree = "<group>"; };
 		D6AFFF202B1384F800F7DFEB /* day7.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = day7.txt; sourceTree = "<group>"; };
 		D6AFFF212B1384F800F7DFEB /* day15.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = day15.txt; sourceTree = "<group>"; };
@@ -222,7 +222,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D6AFFEEC2B1378E600F7DFEB /* Build configuration list for PBXProject "AdventOfCode2023" */;
+			buildConfigurationList = D6AFFEEC2B1378E600F7DFEB /* Build configuration list for PBXProject "AdventOfCode_2023" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -388,7 +388,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D6AFFEEC2B1378E600F7DFEB /* Build configuration list for PBXProject "AdventOfCode2023" */ = {
+		D6AFFEEC2B1378E600F7DFEB /* Build configuration list for PBXProject "AdventOfCode_2023" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D6AFFEF62B1378E600F7DFEB /* Debug */,

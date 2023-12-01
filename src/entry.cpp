@@ -17,14 +17,6 @@ Args parse_args(int num_args, const char* args[])
     return Args { .day_to_run = day_to_run };
 }
 
-std::string read_file(const char* path)
-{
-    std::ifstream file(path);
-    std::string data((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-    file.close();
-    return data;
-}
-
 void entry(const Args& args)
 {
     int day_to_run = args.day_to_run;
@@ -37,7 +29,7 @@ void entry(const Args& args)
     
     switch (day_to_run)
     {
-        case 1: day1(read_file("inputs/day1.txt")); break;
+        case 1: day1(); break;
             
         default:
             std::cout << "Invalid day\n";

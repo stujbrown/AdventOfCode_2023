@@ -6,6 +6,6 @@
 namespace aoc
 {
 
-void day1(std::string&& file);
+void day1();
 
 }
