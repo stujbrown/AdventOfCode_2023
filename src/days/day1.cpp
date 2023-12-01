@@ -30,8 +30,7 @@ int add_line(const std::string& line, bool allow_alpha)
         }
     }
     
-    std::string digit = digits[first_digit % 9] + digits[last_digit % 9];
-    return atoi(digit.c_str());
+    return (((first_digit % 9) + 1) * 10) + (last_digit % 9) + 1;
 }
 
 void aoc::day1()
