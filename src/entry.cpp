@@ -30,6 +30,7 @@ void entry(const Args& args)
     switch (day_to_run)
     {
         case 1: day1(); break;
+        case 2: day2(); break;
             
         default:
             std::cout << "Invalid day\n";
