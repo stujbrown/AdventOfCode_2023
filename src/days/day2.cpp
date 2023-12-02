@@ -1,7 +1,6 @@
 #include "aoc_days.hpp"
 #include <array>
 #include <vector>
-#include <charconv>
 #include <string>
 
 void aoc::day2()
