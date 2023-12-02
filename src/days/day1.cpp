@@ -1,4 +1,5 @@
 #include "aoc_days.hpp"
+#include <vector>
 
 int add_line(const std::string& line, bool allow_alpha)
 {
