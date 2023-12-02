@@ -12,10 +12,21 @@ void aoc::day2()
         const size_t separator_idx = line.find_first_of(':');
         const std::string_view id(line.c_str() + 4, separator_idx - 4);
 
-        size_t string_start = 0;
+        size_t value_start = seperator_idx;
         for (size_t i = seperator_idx; i < line.length(); ++i)
+        {
+            if (line[i] == ',')
+            {
+                value_start = i;
+            }
+            else if (line[i] == ';')
+            {
+                // Rounds are currently irrelevant
+            }
+            else
             {
                 
             }
+        }
     }
 }
