@@ -9,7 +9,7 @@ namespace aoc
 void day1();
 void day2();
 void day3();
-inline void day4() {}
+void day4();
 inline void day5() {}
 inline void day6() {}
 inline void day7() {}
