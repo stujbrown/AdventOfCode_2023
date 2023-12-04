@@ -33,7 +33,7 @@ void aoc::day2()
                 if (strncmp(line.c_str() + i, colours[colour_idx].data(), colours[colour_idx].length()) == 0)
                 {
                     std::string num_str(line.c_str() + value_start, i - value_start);
-                    num_str.erase(std::remove_if(num_str.begin(), num_str.end(), std::isspace), num_str.end());
+                    num_str.erase(std::remove_if(num_str.begin(), num_str.end(), [](auto c) { return std::isspace((unsigned char)c); }), num_str.end());
                     const int value = std::stoi(num_str);
                     max_counts[colour_idx] = std::max(max_counts[colour_idx], value);
 
