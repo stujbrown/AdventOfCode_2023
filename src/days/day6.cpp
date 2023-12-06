@@ -1,6 +1,7 @@
 #include "aoc_days.hpp"
 #include <vector>
 #include <cctype>
+#include <numeric>
 
 long solve_race(long duration, long win_record)
 {
@@ -32,18 +33,10 @@ void aoc::day6()
         }
     }
     
-    long ways_to_win_multiplied = 0;
+    std::vector<long> ways_to_win;
     for (size_t game_idx = 0; game_idx < durations.size(); ++game_idx)
-    {
-        const long ways_to_win = solve_race(durations[game_idx], times[game_idx]);
-        if (ways_to_win_multiplied == 0)
-            ways_to_win_multiplied = ways_to_win;
-        else
-            ways_to_win_multiplied *= ways_to_win > 0 ? ways_to_win : 1;
-    }
+        ways_to_win.push_back(solve_race(durations[game_idx], times[game_idx]));
     
-    const long ways_to_win_big_race = solve_race(std::stol(big_duration_str), std::stol(big_time_str));
-    
-    std::cout << "Ways to win multiplied: " << ways_to_win_multiplied << std::endl;
-    std::cout << "Ways to win the big race: " << ways_to_win_big_race << std::endl;
+    std::cout << "Ways to win multiplied: " << std::accumulate(ways_to_win.begin(), ways_to_win.end(), 1, std::multiplies<long>()) << std::endl;
+    std::cout << "Ways to win the big race: " << solve_race(std::stol(big_duration_str), std::stol(big_time_str)) << std::endl;
 }
