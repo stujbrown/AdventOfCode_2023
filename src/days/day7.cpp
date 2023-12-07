@@ -61,11 +61,11 @@ long solve(bool use_joker)
     
     while (file >> hand_token && file >> bid_token)
     {
-        hands.emplace_back(std::move(Hand
+        hands.emplace_back(Hand
         {
             .hand_score = grade_hand(score_indices, hand_token, use_joker),
             .bid = std::stoi(bid_token)
-        }));
+        });
         
     }
     
