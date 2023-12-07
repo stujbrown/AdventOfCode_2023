@@ -16,7 +16,7 @@ long grade_hand(const std::map<char, long>& score_indices, const std::string& ha
     
     for (size_t i = 0; i < hand_str.length(); ++i)
     {
-        if (hand_str[i] != 'J')
+        if (!use_joker || hand_str[i] != 'J')
             ++value_counts[score_indices.find(hand_str[i])->second];
     }
     std::sort(value_counts.begin(), value_counts.end(), std::greater_equal<long>());
@@ -61,11 +61,11 @@ long solve(bool use_joker)
     
     while (file >> hand_token && file >> bid_token)
     {
-        hands.emplace_back(std::move(Hand
+        hands.emplace_back(Hand
         {
             .hand_score = grade_hand(score_indices, hand_token, use_joker),
             .bid = std::stoi(bid_token)
-        }));
+        });
         
     }
     
