@@ -9,9 +9,9 @@ struct Hand
     long hand_score;
 };
 
-long grade_hand(const std::map<char, long>& score_indices, const std::string& hand_str, bool use_joker)
+long grade_hand(const std::map<char, int>& score_indices, const std::string& hand_str, bool use_joker)
 {
-    std::array<long, 13> value_counts;
+    std::array<int, 13> value_counts;
     value_counts.fill(0);
     
     for (size_t i = 0; i < hand_str.length(); ++i)
@@ -19,7 +19,7 @@ long grade_hand(const std::map<char, long>& score_indices, const std::string& ha
         if (!use_joker || hand_str[i] != 'J')
             ++value_counts[score_indices.find(hand_str[i])->second];
     }
-    std::sort(value_counts.begin(), value_counts.end(), std::greater_equal<long>());
+    std::sort(value_counts.begin(), value_counts.end(), std::greater_equal<int>());
     
     // 4-bits to represent 13 values, so 20 bits to represent the top per-card score
     static const long max_hand_score = 0b11111111111111111111;
@@ -55,9 +55,9 @@ long solve(bool use_joker)
     std::string hand_token, bid_token;
     std::vector<Hand> hands;
     
-    const std::map<char, long> basic_indices { {'2', 0}, {'3', 1}, {'4', 2}, {'5', 3}, {'6', 4}, {'7', 5}, {'8', 6}, {'9', 7}, {'T', 8}, {'J', 9}, {'Q', 10}, {'K', 11}, {'A', 12} };
-    const std::map<char, long> joker_indices { {'J', 0}, {'2', 1}, {'3', 2}, {'4', 3}, {'5', 4}, {'6', 5}, {'7', 6}, {'8', 7}, {'9', 8}, {'T', 9}, {'Q', 10}, {'K', 11}, {'A', 12} };
-    const std::map<char, long>& score_indices = use_joker ? joker_indices : basic_indices;
+    const std::map<char, int> basic_indices { {'2', 0}, {'3', 1}, {'4', 2}, {'5', 3}, {'6', 4}, {'7', 5}, {'8', 6}, {'9', 7}, {'T', 8}, {'J', 9}, {'Q', 10}, {'K', 11}, {'A', 12} };
+    const std::map<char, int> joker_indices { {'J', 0}, {'2', 1}, {'3', 2}, {'4', 3}, {'5', 4}, {'6', 5}, {'7', 6}, {'8', 7}, {'9', 8}, {'T', 9}, {'Q', 10}, {'K', 11}, {'A', 12} };
+    const std::map<char, int>& score_indices = use_joker ? joker_indices : basic_indices;
     
     while (file >> hand_token && file >> bid_token)
     {
