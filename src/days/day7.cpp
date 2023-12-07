@@ -5,84 +5,82 @@
 
 struct Hand
 {
-    std::array<int, 5> value_indices;
-    int bid;
-    int hand_score;
+    long bid;
+    long hand_score;
 };
 
-void aoc::day7()
+long grade_hand(const std::map<char, long>& score_indices, const std::string& hand_str, bool use_joker)
+{
+    std::array<long, 13> value_counts;
+    value_counts.fill(0);
+    
+    for (size_t i = 0; i < hand_str.length(); ++i)
+    {
+        if (hand_str[i] != 'J')
+            ++value_counts[score_indices.find(hand_str[i])->second];
+    }
+    std::sort(value_counts.begin(), value_counts.end(), std::greater_equal<long>());
+    
+    // 4-bits to represent 13 values, so 20 bits to represent the top per-card score
+    static const long max_hand_score = 0b11111111111111111111;
+    long score = 0;
+    for (size_t i = 0; i < 5; ++i)
+        score |= (score_indices.find(hand_str[i])->second + 1) << (4 * (4 - i));
+    
+    const size_t joker_count = use_joker ? std::count(hand_str.begin(), hand_str.end(), 'J') : 0;
+    if (value_counts[0] >= 5 - joker_count)
+        return (max_hand_score * 6) + score;
+    
+    if (value_counts[0] >= 4 - joker_count)
+        return (max_hand_score * 5) + score;
+    
+    if (value_counts[0] + value_counts[1] >= 5 - joker_count)
+        return (max_hand_score * 4) + score;
+    
+    if (value_counts[0] >= 3 - joker_count)
+        return (max_hand_score * 3) + score;
+    
+    if (value_counts[0] + value_counts[1] >= 4 - joker_count)
+        return (max_hand_score * 2) + score;
+    
+    if (value_counts[0] >= 2 - joker_count)
+        return max_hand_score + score;
+    
+    return score;
+}
+
+long solve(bool use_joker)
 {
     std::ifstream file("inputs/day7.txt");
-    std::string token;
-    
+    std::string hand_token, bid_token;
     std::vector<Hand> hands;
     
-    std::map<char, int> indices { {'2', 0}, {'3', 1}, {'4', 2}, {'5', 3}, {'6', 4}, {'7', 5}, {'8', 6}, {'9', 7}, {'T', 8}, {'J', 9}, {'Q', 10}, {'K', 11}, {'A', 12} };
-    while (file >> token)
+    const std::map<char, long> basic_indices { {'2', 0}, {'3', 1}, {'4', 2}, {'5', 3}, {'6', 4}, {'7', 5}, {'8', 6}, {'9', 7}, {'T', 8}, {'J', 9}, {'Q', 10}, {'K', 11}, {'A', 12} };
+    const std::map<char, long> joker_indices { {'J', 0}, {'2', 1}, {'3', 2}, {'4', 3}, {'5', 4}, {'6', 5}, {'7', 6}, {'8', 7}, {'9', 8}, {'T', 9}, {'Q', 10}, {'K', 11}, {'A', 12} };
+    const std::map<char, long>& score_indices = use_joker ? joker_indices : basic_indices;
+    
+    while (file >> hand_token && file >> bid_token)
     {
-        std::array<int, 13> value_counts;
-        value_counts.fill(0);
+        hands.emplace_back(std::move(Hand
+        {
+            .hand_score = grade_hand(score_indices, hand_token, use_joker),
+            .bid = std::stoi(bid_token)
+        }));
         
-        Hand hand;
-        for (size_t i = 0; i < token.length(); ++i)
-        {
-            hand.value_indices[i] = indices[token[i]];
-            ++value_counts[indices[token[i]]];
-        }
-        
-        // 4-bits to represent 13 values, so 20 bits to represent the top per-card score
-        static const int max_hand_score = 0b11111111111111111111;
-        int score = 0, total_rating = 0;
-        for (size_t i = 0; i < 5; ++i)
-            score |= (hand.value_indices[i] + 1) << (4 * (4 - i)); // Pack all card values left-first
-        
-        if (std::find(value_counts.begin(), value_counts.end(), 5) != value_counts.end())
-        {
-            total_rating = (max_hand_score * 6) + score;
-        }
-        else if (std::find(value_counts.begin(), value_counts.end(), 4) != value_counts.end())
-        {
-            total_rating = (max_hand_score * 5) + score;
-        }
-        else if (std::find(value_counts.begin(), value_counts.end(), 3) != value_counts.end() &&
-                 std::find(value_counts.begin(), value_counts.end(), 2) != value_counts.end())
-        {
-            total_rating = (max_hand_score * 4) + score;
-        }
-        else if (std::find(value_counts.begin(), value_counts.end(), 3) != value_counts.end())
-        {
-            total_rating = (max_hand_score * 3) + score;
-        }
-        else
-        {
-            const size_t num_pairs = std::count(value_counts.begin(), value_counts.end(), 2);
-            if (num_pairs == 2)
-            {
-                total_rating = (max_hand_score * 2) + score;
-            }
-            else if (num_pairs == 1)
-            {
-                total_rating = max_hand_score + score;
-            }
-            else
-            {
-                total_rating = score;
-            }
-        }
-        
-        hand.hand_score = total_rating;
-        
-        file >> token;
-        hand.bid = std::stoi(token);
-        hands.emplace_back(std::move(hand));
     }
     
     std::sort(hands.begin(), hands.end(), [](const Hand& lhs, const Hand& rhs) { return lhs.hand_score < rhs.hand_score; });
     
-    int winnings = 0;
+    long winnings = 0;
     for (size_t i = 0; i < hands.size(); ++i)
-    {
         winnings += hands[i].bid * (i + 1);
-    }
+    return winnings;
+}
+
+void aoc::day7()
+{
+    const long winnings = solve(false);
+    const long joker_winnings = solve(true);
     std::cout << "Total winnings: " << winnings << std::endl;
+    std::cout << "Total winnings with joker: " << joker_winnings << std::endl;
 }
