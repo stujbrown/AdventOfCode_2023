@@ -27,26 +27,22 @@ long grade_hand(const std::map<char, int>& score_indices, const std::string& han
     for (size_t i = 0; i < 5; ++i)
         score |= (score_indices.find(hand_str[i])->second + 1) << (4 * (4 - i));
     
+    int grade = 0;
     const size_t joker_count = use_joker ? std::count(hand_str.begin(), hand_str.end(), 'J') : 0;
     if (value_counts[0] >= 5 - joker_count)
-        return (max_hand_score * 6) + score;
+        grade = 6;
+    else if (value_counts[0] >= 4 - joker_count)
+        grade = 5;
+    else if (value_counts[0] + value_counts[1] >= 5 - joker_count)
+        grade = 4;
+    else if (value_counts[0] >= 3 - joker_count)
+        grade = 3;
+    else if (value_counts[0] + value_counts[1] >= 4 - joker_count)
+        grade = 2;
+    else if (value_counts[0] >= 2 - joker_count)
+        grade = 1;
     
-    if (value_counts[0] >= 4 - joker_count)
-        return (max_hand_score * 5) + score;
-    
-    if (value_counts[0] + value_counts[1] >= 5 - joker_count)
-        return (max_hand_score * 4) + score;
-    
-    if (value_counts[0] >= 3 - joker_count)
-        return (max_hand_score * 3) + score;
-    
-    if (value_counts[0] + value_counts[1] >= 4 - joker_count)
-        return (max_hand_score * 2) + score;
-    
-    if (value_counts[0] >= 2 - joker_count)
-        return max_hand_score + score;
-    
-    return score;
+    return (max_hand_score * grade) + score;
 }
 
 long solve(bool use_joker)
