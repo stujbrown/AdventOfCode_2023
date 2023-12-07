@@ -34,7 +34,7 @@ void aoc::day7()
         static const int max_hand_score = 0b11111111111111111111;
         int score = 0, total_rating = 0;
         for (size_t i = 0; i < 5; ++i)
-            score |= (hand.value_indices[i] + 1) << (4 * i); // Pack all card values left-first
+            score |= (hand.value_indices[i] + 1) << (4 * (4 - i)); // Pack all card values left-first
         
         if (std::find(value_counts.begin(), value_counts.end(), 5) != value_counts.end())
         {
