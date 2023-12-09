@@ -9,38 +9,27 @@ struct Node
     std::string right;
 };
 
-
 size_t solve(const std::map<std::string, std::unique_ptr<Node>>& nodes, const std::string& instructions, bool use_multipath)
 {
-    std::vector<const Node*> current_nodes;
+    std::vector<const Node*> path_starts;
     if (use_multipath)
     {
         for (const auto& node : nodes)
         {
             if (node.first.ends_with('A'))
-                current_nodes.push_back(node.second.get());
+                path_starts.push_back(node.second.get());
         }
     }
     else
-        current_nodes.push_back(nodes.find("AAA")->second.get());
+        path_starts.push_back(nodes.find("AAA")->second.get());
     
-    struct EndPathNode
+    std::vector<size_t> steps_to_next_end(path_starts.size(), 0);
+    for (size_t current_idx = 0; current_idx < path_starts.size(); ++current_idx)
     {
-        size_t steps_to_next;
-        std::shared_ptr<EndPathNode> next;
-    };
-    
-    std::vector<std::shared_ptr<EndPathNode>> path_positions;
-    for (size_t current_idx = 0; current_idx < current_nodes.size(); ++current_idx)
-    {
-        std::map<std::pair<std::string, size_t>, std::shared_ptr<EndPathNode>> end_nodes;
         size_t next_instruction = 0;
         size_t steps_taken = 0;
-        std::shared_ptr<EndPathNode> start(new EndPathNode { .steps_to_next = 0 });
-        std::shared_ptr<EndPathNode> last_node = start;
-        path_positions.push_back(start);
         
-        const Node* current = current_nodes[current_idx];
+        const Node* current = path_starts[current_idx];
         while (current != nullptr)
         {
             ++steps_taken;
@@ -53,20 +42,10 @@ size_t solve(const std::map<std::string, std::unique_ptr<Node>>& nodes, const st
             
             if (use_multipath ? next->ends_with('Z') : next->compare("ZZZ") == 0)
             {
-                auto found_node = end_nodes.find(std::make_pair(*next, next_instruction));
-                if (found_node != end_nodes.end())
-                {
-                    last_node->next = found_node->second;
-                    last_node->steps_to_next = steps_taken;
+                if (steps_to_next_end[current_idx] == steps_taken) // Big dumb assumption that it'll start looping (this input does)
                     break;
-                }
                 
-                std::shared_ptr<EndPathNode> new_node(new EndPathNode { .steps_to_next = 0 });
-                end_nodes.insert(std::make_pair(std::make_pair(*next, next_instruction), new_node));
-                last_node->next = new_node;
-                last_node->steps_to_next = steps_taken;
-                last_node = new_node;
-                
+                steps_to_next_end[current_idx] = steps_taken;
                 steps_taken = 0;
             }
             current = nodes.find(*next)->second.get();
@@ -75,12 +54,12 @@ size_t solve(const std::map<std::string, std::unique_ptr<Node>>& nodes, const st
     }
     
     size_t lcm = 0;
-    for (const auto& node : path_positions)
+    for (const size_t steps : steps_to_next_end)
     {
         if (lcm == 0)
-            lcm = node->next->next->steps_to_next;
+            lcm = steps;
         else
-            lcm = std::lcm(node->next->next->steps_to_next, lcm);
+            lcm = std::lcm(steps, lcm);
     }
     return lcm;
 }
