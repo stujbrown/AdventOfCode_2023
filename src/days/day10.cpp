@@ -40,7 +40,11 @@ void expand_direction(std::vector<std::shared_ptr<SearchNode>>& results, const s
         const auto& connections = valid_conections[(size_t)dir];
         if (std::find(connections.begin(), connections.end(), next) != connections.end())
         {
-            results.push_back(std::shared_ptr<SearchNode>(new SearchNode { .pos = Coord { .x = next_pos.x, .y = next_pos.y }, .previous = current_node, .num_steps_taken = current_node->num_steps_taken + 1, .dir = dir}));
+            results.push_back(std::shared_ptr<SearchNode>(new SearchNode {
+                .pos = Coord { .x = next_pos.x, .y = next_pos.y },
+                .previous = current_node,
+                .num_steps_taken = current_node->num_steps_taken + 1,
+                .dir = dir}));
         }
     }
 }
@@ -51,22 +55,14 @@ void expand(std::vector<std::shared_ptr<SearchNode>>& results, const std::vector
     const Coord& pos = current_node->pos;
     const char current = map[pos.y][pos.x];
     
-    if (pos.x > 0 /*&& current_direction != Direction::Right*/ && valid_directions.find(current)->second[(size_t)Direction::Left])
-    {
+    if (pos.x > 0 && valid_directions.find(current)->second[(size_t)Direction::Left])
         expand_direction(results, map, current_node, -1, 0, Direction::Left);
-    }
-    if (pos.x < map[0].length() /*&& current_direction != Direction::Left */&& valid_directions.find(current)->second[(size_t)Direction::Right])
-    {
+    if (pos.x < map[0].length() && valid_directions.find(current)->second[(size_t)Direction::Right])
         expand_direction(results, map, current_node, 1, 0, Direction::Right);
-    }
-    if (pos.y > 0 /*&& current_direction != Direction::Down*/ && valid_directions.find(current)->second[(size_t)Direction::Up])
-    {
+    if (pos.y > 0 && valid_directions.find(current)->second[(size_t)Direction::Up])
         expand_direction(results, map, current_node, 0, -1, Direction::Up);
-    }
-    if (pos.x < map.size() /*&& current_direction != Direction::Up */&& valid_directions.find(current)->second[(size_t)Direction::Down])
-    {
+    if (pos.x < map.size() && valid_directions.find(current)->second[(size_t)Direction::Down])
         expand_direction(results, map, current_node, 0, 1, Direction::Down);
-    }
 }
 
 void aoc::day10()
@@ -87,7 +83,6 @@ void aoc::day10()
     
     size_t furthest_point = 0;
     
-   // std::set<Coord> visited;
     std::vector<std::shared_ptr<SearchNode>> stack;
     std::vector<std::shared_ptr<SearchNode>> expanded;
     stack.push_back(std::shared_ptr<SearchNode>(new SearchNode {.pos = start_pos, .dir = Direction::None}));
@@ -96,7 +91,6 @@ void aoc::day10()
     {
         const auto current = stack[stack.size() - 1];
         stack.pop_back();
-       // visited.insert(current);
         
         expand(expanded, map, current);
         for (const auto& next : expanded)
@@ -107,11 +101,7 @@ void aoc::day10()
                 furthest_point = int((((double)current->num_steps_taken + 1) + 0.5) / 2.0);
                 break;
             }
-            
-           // if (!visited.contains(next))
-            {
-                stack.push_back(next);
-            }
+            stack.push_back(next);
         }
     }
     
