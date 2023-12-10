@@ -99,10 +99,6 @@ void aoc::day10()
         const auto current = stack[stack.size() - 1];
         stack.pop_back();
         
-        if (current->pos.x == 9 && current->pos.y == 2)
-        {
-            printf("");
-        }
         expand(expanded, map, current);
         for (const auto& next : expanded)
         {
@@ -117,47 +113,36 @@ void aoc::day10()
         }
     }
     
-    size_t included_cells = 0;
+    // Walk the route and seed the flood-fill using left-hand positions
     std::vector<Coord> fill_stack;
-    
-    std::set<Coord> route_cells;
+    std::set<Coord> visited;
     SearchNode* current = end_node.get();
     while (current != nullptr)
     {
         const Coord& from = current->pos;
-        route_cells.insert(from);
+        visited.insert(from);
         current = current->previous.get();
-        
         if (current != nullptr)
         {
             const int dir_x = current->pos.x - from.x;
             const int dir_y = current->pos.y - from.y;
             if (dir_x > 0 && from.y > 0)
-            {
                 fill_stack.push_back(Coord {.x = from.x, .y = from.y - 1});
-            }
             else if (dir_x < 0 && from.y < map.size())
-            {
                 fill_stack.push_back(Coord {.x = from.x, .y = from.y + 1});
-            }
             else if (dir_y > 0 && from.x < map[0].length())
-            {
                 fill_stack.push_back(Coord {.x = from.x + 1, .y = from.y});
-            }
             else if (dir_y < 0 && from.x > 0)
-            {
                 fill_stack.push_back(Coord {.x = from.x - 1, .y = from.y});
-            }
         }
     }
     
-    std::set<Coord> visited;
     std::vector<std::vector<int>> fill_map(map.size(), std::vector<int>(map[0].length(), 0));
     while (!fill_stack.empty())
     {
         const Coord next = fill_stack[fill_stack.size() - 1];
         fill_stack.pop_back();
-        if (!visited.contains(next) && !route_cells.contains(next))
+        if (!visited.contains(next))
         {
             fill_map[next.y][next.x] = 1;
             visited.insert(next);
@@ -172,11 +157,9 @@ void aoc::day10()
         }
     }
     
+    size_t included_cells = 0;
     for (size_t y = 0; y < fill_map.size(); ++y)
-    {
         included_cells += std::accumulate(fill_map[y].begin(), fill_map[y].end(), 0);
-    }
-
     
     std::cout << "Furthest distance: " << furthest_point << std::endl;
     std::cout << "Included cells: " << included_cells << std::endl;
