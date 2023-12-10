@@ -3,7 +3,7 @@
 
 void aoc::day9()
 {
-    int end_total = 0;
+    int start_total = 0, end_total = 0;
     
     std::ifstream file("inputs/day9.txt");
     std::string line;
@@ -37,13 +37,11 @@ void aoc::day9()
             {
                 const int current = sequences[sequence_idx][i];
                 const int diff = current - previous;
-                if (diff != 0)
-                {
-                    all_zero = false;
-                }
-                
                 sequences[sequence_idx + 1].push_back(diff);
                 previous = current;
+                
+                if (diff != 0)
+                    all_zero = false;
             }
             ++sequence_idx;
         }
@@ -52,12 +50,17 @@ void aoc::day9()
         {
             const std::vector<int>& this_sequence = sequences[sequence_idx];
             std::vector<int>& above_sequence = sequences[sequence_idx - 1];
-            const int increment = this_sequence[this_sequence.size() - 1];
-            above_sequence.push_back(above_sequence[above_sequence.size() - 1] + increment);
+            
+            const int start_increment = this_sequence[0];
+            const int end_increment = this_sequence[this_sequence.size() - 1];
+            above_sequence.push_back(above_sequence[above_sequence.size() - 1] + end_increment);
+            above_sequence.insert(above_sequence.begin(), above_sequence[0] - start_increment);
         }
         
         end_total += sequences[0][sequences[0].size() - 1];
+        start_total += sequences[0][0];
     }
     
     std::cout << "End value total: " << end_total << std::endl;
+    std::cout << "Start value total: " << start_total << std::endl;
 }
