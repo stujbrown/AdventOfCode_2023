@@ -58,14 +58,28 @@ void match_pattern(size_t& out_matches, const std::string& record, size_t curren
    // return false;
 }
 
-void aoc::day12()
+size_t solve_possibilities(bool expanded)
 {
     size_t total_matches = 0;
     
     std::ifstream file("inputs/day12.txt");
-    std::string damaged_record, other_record;
-    while (file >> damaged_record && file >> other_record)
+    std::string damaged_record_single, other_record_single, damaged_record, other_record;
+    while (file >> damaged_record_single && file >> other_record_single)
     {
+        damaged_record = damaged_record_single;
+        other_record = other_record_single;
+        if (expanded)
+        {
+            for (size_t i = 1; i < 5; ++i)
+            {
+                damaged_record.append("?");
+                damaged_record.append(damaged_record_single);
+                
+                other_record.append(",");
+                other_record.append(other_record_single);
+            }
+        }
+        
         std::vector<int> damaged_counts;
         size_t parse_offset = 0, str_end = 0;
         while (parse_offset < other_record.length())
@@ -81,6 +95,14 @@ void aoc::day12()
         std::cout << matches << std::endl;
         total_matches += matches;
     }
+    return total_matches;
+}
+
+void aoc::day12()
+{
+   // const size_t total_matches = solve_possibilities(false);
+    const size_t total_matches_expanded = solve_possibilities(true);
     
-    std::cout << "Total possibilities: " << total_matches << std::endl;
+    //std::cout << "Total possibilities: " << total_matches << std::endl;
+    std::cout << "Total possibilities (expanded): " << total_matches_expanded << std::endl;
 }
