@@ -3,28 +3,47 @@
 #include <set>
 
 struct Coord { int x = 0; int y = 0; };
-inline bool operator==(const Coord& lhs, const Coord& rhs) { return lhs.x == rhs.x && lhs.y == rhs.y; }
 inline bool operator<(const Coord& lhs, const Coord& rhs)
 {
     return (lhs.x < rhs.x) || ((lhs.x == rhs.x) && (lhs.y < rhs.y));
 }
 
+size_t count_distances(const std::vector<std::pair<Coord, Coord>>& pairs, const std::vector<size_t>& row_offsets, const std::vector<size_t>& column_offsets, size_t expansion_amount)
+{
+    size_t total_distances = 0;
+    for (const auto& pair : pairs)
+    {
+        const Coord start { .x = pair.first.x + int(column_offsets[pair.first.x] * expansion_amount),
+            .y = pair.first.y + int(row_offsets[pair.first.y] * expansion_amount) };
+        
+        const Coord end { .x = pair.second.x + int(column_offsets[pair.second.x] * expansion_amount),
+            .y = pair.second.y + int(row_offsets[pair.second.y] * expansion_amount) };
+        
+        total_distances += std::abs(start.x - end.x) + std::abs(start.y - end.y);
+    }
+    return total_distances;
+}
+
 void aoc::day11()
 {
+    std::vector<size_t> row_offsets;
+    std::vector<size_t> column_offsets;
+    
     std::vector<std::string> galaxy_map;
     std::ifstream file("inputs/day11.txt");
     std::string line;
+    size_t offset = 0;
     while (file >> line)
     {
         std::string empty_row(line.size(), '.');
-        const bool contains_galaxy = line.find('#') != std::string::npos;
+        if (line.find('#') == std::string::npos)
+            offset += 1;
         
         galaxy_map.push_back(line);
-        
-        if (!contains_galaxy)
-            galaxy_map.push_back(empty_row);
+        row_offsets.push_back(offset);
     }
     
+    offset = 0;
     for (size_t column_idx = 0; column_idx < galaxy_map[0].length(); ++column_idx)
     {
         bool contains_galaxy = false;
@@ -36,13 +55,11 @@ void aoc::day11()
                 break;
             }
         }
+        
         if (!contains_galaxy)
-        {
-            for (size_t i = 0; i < galaxy_map.size(); ++i)
-                galaxy_map[i].insert(column_idx, ".");
+            offset += 1;
             
-            column_idx += 1;
-        }
+        column_offsets.push_back(offset);
     }
     
     std::set<std::pair<Coord, Coord>> recorded_pairs;
@@ -75,12 +92,9 @@ void aoc::day11()
         }
     }
     
-    size_t total_distances = 0;
-    for (const auto& pair : pairs)
-    {
-        const int distance = std::abs(pair.first.x - pair.second.x) + std::abs(pair.first.y - pair.second.y);
-        total_distances += distance;
-    }
+    const size_t total_distances = count_distances(pairs, row_offsets, column_offsets, 1);
+    const size_t total_distances_big = count_distances(pairs, row_offsets, column_offsets, 1000000 - 1);
     
     std::cout << "Total of distances: " << total_distances << std::endl;
+    std::cout << "Total of distances for the big universe: " << total_distances_big << std::endl;
 }
