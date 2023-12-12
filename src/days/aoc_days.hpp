@@ -17,7 +17,7 @@ void day8();
 void day9();
 void day10();
 void day11();
-inline void day12() {}
+void day12();
 inline void day13() {}
 inline void day14() {}
 inline void day15() {}

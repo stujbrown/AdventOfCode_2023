@@ -11,6 +11,7 @@
 		D61C94962B21DCBA00676E65 /* day7.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D61C94952B21DCBA00676E65 /* day7.cpp */; };
 		D63A6B1A2B1F333900551DF8 /* day5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D63A6B192B1F333900551DF8 /* day5.cpp */; };
 		D64605522B20AEC400B9944E /* day6.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D64605512B20AEC400B9944E /* day6.cpp */; };
+		D67F32CE2B287B8E00931C56 /* day12.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D67F32CD2B287B8E00931C56 /* day12.cpp */; };
 		D682446A2B23337A0099DA85 /* day8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D68244692B23337A0099DA85 /* day8.cpp */; };
 		D682446C2B24F2540099DA85 /* day9.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D682446B2B24F2540099DA85 /* day9.cpp */; };
 		D682446F2B25E4050099DA85 /* day10.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D682446E2B25E4050099DA85 /* day10.cpp */; };
@@ -89,6 +90,7 @@
 		D61C94952B21DCBA00676E65 /* day7.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = day7.cpp; sourceTree = "<group>"; };
 		D63A6B192B1F333900551DF8 /* day5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = day5.cpp; sourceTree = "<group>"; };
 		D64605512B20AEC400B9944E /* day6.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = day6.cpp; sourceTree = "<group>"; };
+		D67F32CD2B287B8E00931C56 /* day12.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = day12.cpp; sourceTree = "<group>"; };
 		D68244692B23337A0099DA85 /* day8.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = day8.cpp; sourceTree = "<group>"; };
 		D682446B2B24F2540099DA85 /* day9.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = day9.cpp; sourceTree = "<group>"; };
 		D682446E2B25E4050099DA85 /* day10.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = day10.cpp; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				D6AFFF052B137DF400F7DFEB /* aoc_days.hpp */,
 				D61C94952B21DCBA00676E65 /* day7.cpp */,
 				D682446E2B25E4050099DA85 /* day10.cpp */,
+				D67F32CD2B287B8E00931C56 /* day12.cpp */,
 			);
 			path = days;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 			files = (
 				D6AFFF022B137BB700F7DFEB /* entry.cpp in Sources */,
 				D682446F2B25E4050099DA85 /* day10.cpp in Sources */,
+				D67F32CE2B287B8E00931C56 /* day12.cpp in Sources */,
 				D6EC1DE12B1E0EDE008FE11E /* day2.cpp in Sources */,
 				D6EC1DE52B1E14E4008FE11E /* main.cpp in Sources */,
 				D682446A2B23337A0099DA85 /* day8.cpp in Sources */,
