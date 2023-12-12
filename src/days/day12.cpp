@@ -25,7 +25,6 @@ void match_pattern(size_t& out_matches, const std::string& record, size_t curren
             const char skipped_element = record[i + counts[count_idx]];
             if (skipped_element != '#') // The match just now has to be wrong since this can't be a spacing element
             {
-                
                 if (count_idx + 1 >= counts.size())
                 {
                     bool is_valid = true;
@@ -56,7 +55,7 @@ void match_pattern(size_t& out_matches, const std::string& record, size_t curren
             }
         }
         
-        if (record[i] == '#') // Can't evaluate this from the next position or a required element is omitted
+        if (record[i] == '#') // Can't walk past this without using it
             i = record.size();
     }
 }
