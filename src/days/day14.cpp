@@ -1,7 +1,7 @@
-#include "aoc_days.cpp"
+#include "aoc_days.hpp"
 #include <vector>
 
-aoc days::day14()
+void aoc::day14()
 {
     std::vector<std::string> map;
     
@@ -25,7 +25,7 @@ aoc days::day14()
             }
         }
         if (updated)
-            --y;
+            y = (y > 2) ? y - 2 : 0;
     }
 
     size_t load = 0;
