@@ -17,6 +17,7 @@
 		D682446F2B25E4050099DA85 /* day10.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D682446E2B25E4050099DA85 /* day10.cpp */; };
 		D688AA462B29BEB70059C186 /* day13.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D688AA452B29BEB70059C186 /* day13.cpp */; };
 		D688AA482B2B0CA30059C186 /* day14.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D688AA472B2B0CA30059C186 /* day14.cpp */; };
+		D688AA4A2B2C6E7A0059C186 /* day15.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D688AA492B2C6E7A0059C186 /* day15.cpp */; };
 		D6AFFF022B137BB700F7DFEB /* entry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6AFFF002B137BB700F7DFEB /* entry.cpp */; };
 		D6AFFF042B137CB900F7DFEB /* day1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6AFFF032B137CB900F7DFEB /* day1.cpp */; };
 		D6AFFF262B13852A00F7DFEB /* day1.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = D6AFFF1E2B1384F800F7DFEB /* day1.txt */; };
@@ -98,6 +99,7 @@
 		D682446E2B25E4050099DA85 /* day10.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = day10.cpp; sourceTree = "<group>"; };
 		D688AA452B29BEB70059C186 /* day13.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = day13.cpp; sourceTree = "<group>"; };
 		D688AA472B2B0CA30059C186 /* day14.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = day14.cpp; sourceTree = "<group>"; };
+		D688AA492B2C6E7A0059C186 /* day15.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = day15.cpp; sourceTree = "<group>"; };
 		D6AFFEF12B1378E600F7DFEB /* AdventOfCode2023 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AdventOfCode2023; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6AFFF002B137BB700F7DFEB /* entry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = entry.cpp; sourceTree = "<group>"; };
 		D6AFFF012B137BB700F7DFEB /* entry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = entry.hpp; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				D682446E2B25E4050099DA85 /* day10.cpp */,
 				D67F32CD2B287B8E00931C56 /* day12.cpp */,
 				D688AA452B29BEB70059C186 /* day13.cpp */,
+				D688AA492B2C6E7A0059C186 /* day15.cpp */,
 			);
 			path = days;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				D682446C2B24F2540099DA85 /* day9.cpp in Sources */,
 				D688AA482B2B0CA30059C186 /* day14.cpp in Sources */,
 				D688AA462B29BEB70059C186 /* day13.cpp in Sources */,
+				D688AA4A2B2C6E7A0059C186 /* day15.cpp in Sources */,
 				D63A6B1A2B1F333900551DF8 /* day5.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
