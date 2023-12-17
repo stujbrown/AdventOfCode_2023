@@ -27,13 +27,14 @@ void aoc::day16()
     std::vector<std::vector<bool>> energised(map.size(), std::vector<bool>(map[0].size(), false));
     std::set<Beam> history;
 
-    std::vector<Beam> beams(1, Beam {.vel_x = 1});
+    std::vector<Beam> beams(1, Beam {.vel_x = 1, .x = -1});
     while (!beams.empty())
     {
         for (size_t beam_idx = 0; beam_idx < beams.size(); ++beam_idx)
         {
             Beam& beam = beams[beam_idx];
-            energised[beam.y][beam.x] = true;
+            if (beam.x >= 0) // i.e. not from the entry spot
+                energised[beam.y][beam.x] = true;
             
             bool remove = false;
             if (history.contains(beam))
