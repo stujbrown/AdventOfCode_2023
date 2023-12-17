@@ -1,5 +1,6 @@
 #include "aoc_days.hpp"
 #include <vector>
+#include <string>
 
 int scan_map_direction(const std::vector<std::string>& map, bool vertical, int ignore_line = -1)
 {

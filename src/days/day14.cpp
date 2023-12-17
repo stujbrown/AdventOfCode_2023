@@ -88,7 +88,7 @@ void aoc::day14()
         {
             if ((*itr) == map)
             {
-                const int loop_length = (record_idx + 1);
+                const int loop_length = ((int)record_idx + 1);
                 const size_t s = (1000000000 - i) % loop_length;
                 if (s == 1)
                 {

@@ -2,6 +2,9 @@
 #include <array>
 #include <numeric>
 #include <map>
+#include <string>
+#include <vector>
+#include <algorithm>
 
 struct Hand
 {
@@ -59,17 +62,16 @@ long solve(bool use_joker)
     {
         hands.emplace_back(Hand
         {
-            .hand_score = grade_hand(score_indices, hand_token, use_joker),
-            .bid = std::stoi(bid_token)
+            .bid = std::stoi(bid_token),
+            .hand_score = grade_hand(score_indices, hand_token, use_joker)
         });
-        
     }
     
     std::sort(hands.begin(), hands.end(), [](const Hand& lhs, const Hand& rhs) { return lhs.hand_score < rhs.hand_score; });
     
     long winnings = 0;
     for (size_t i = 0; i < hands.size(); ++i)
-        winnings += hands[i].bid * (i + 1);
+        winnings += hands[i].bid * ((long)i + 1);
     return winnings;
 }
 

@@ -2,6 +2,7 @@
 #include <vector>
 #include <cctype>
 #include <numeric>
+#include <string>
 
 long solve_race(long duration, long win_record)
 {

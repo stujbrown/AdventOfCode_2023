@@ -1,5 +1,7 @@
 #include "aoc_days.hpp"
 #include <vector>
+#include <string>
+#include <algorithm>
 
 struct SeedRange
 {

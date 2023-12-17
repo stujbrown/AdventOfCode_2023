@@ -2,6 +2,8 @@
 #include <set>
 #include <vector>
 #include <numeric>
+#include <string>
+#include <algorithm>
 
 void aoc::day4()
 {
@@ -43,7 +45,7 @@ void aoc::day4()
             for (size_t j = 0; j < matches.size(); ++j)
                 card_multipliers[current_game + 1 + j] += card_multipliers[current_game];
             
-            point_total += std::pow(2, matches.size() - 1);
+            point_total += (int)std::pow(2, matches.size() - 1);
         }
         ++current_game;
     }

@@ -2,6 +2,7 @@
 #include <vector>
 #include <map>
 #include <numeric>
+#include <string>
 
 void match_pattern(size_t& out_matches, const std::string& record, size_t current_pos, const std::vector<int> counts, size_t count_idx, std::map<std::pair<size_t, size_t>, size_t>& memory)
 {

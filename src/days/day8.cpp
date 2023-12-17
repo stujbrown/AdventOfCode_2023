@@ -2,7 +2,10 @@
 #include <map>
 #include <vector>
 #include <numeric>
+#include <string>
 
+namespace
+{
 struct Node
 {
     std::string left;
@@ -48,7 +51,7 @@ size_t solve(const std::map<std::string, std::unique_ptr<Node>>& nodes, const st
                 steps_to_next_end[current_idx] = steps_taken;
                 steps_taken = 0;
             }
-            current = nodes.find(*next)->second.get();
+            current = next ? nodes.find(*next)->second.get() : nullptr;
             next_instruction = (next_instruction + 1) % instructions.length();
         }
     }
@@ -62,6 +65,7 @@ size_t solve(const std::map<std::string, std::unique_ptr<Node>>& nodes, const st
             lcm = std::lcm(steps, lcm);
     }
     return lcm;
+}
 }
 
 void aoc::day8()

@@ -1,6 +1,8 @@
 #include "aoc_days.hpp"
 #include <sstream>
 #include <algorithm>
+#include <vector>
+#include <array>
 
 struct Lens
 {

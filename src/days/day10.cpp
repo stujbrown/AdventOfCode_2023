@@ -3,6 +3,7 @@
 #include <set>
 #include <map>
 #include <numeric>
+#include <array>
 
 struct Coord { int x; int y; };
 enum class Direction : uint8_t { Left = 0, Right = 1, Up = 2, Down = 3, None = 4 };
@@ -74,7 +75,7 @@ void expand(std::vector<std::shared_ptr<SearchNode>>& results, const std::vector
 void aoc::day10()
 {
     std::vector<std::string> map;
-    Coord start_pos;
+    Coord start_pos{ 0, 0 };
     
     std::ifstream file("inputs/day10.txt");
     std::string line;
