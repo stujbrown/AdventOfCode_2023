@@ -15,25 +15,24 @@ inline bool operator<(const Beam& lhs, const Beam& rhs)
     return std::tie(lhs.x, lhs.y, lhs.vel_x, lhs.vel_y) < std::tie(rhs.x, rhs.y, rhs.vel_x, rhs.vel_y);
 }
 
-void aoc::day16()
+size_t count_enegised(const std::vector<std::string>& map, int start_x, int start_y)
 {
-    std::vector<std::string> map;
-    std::string line;
-  
-    std::ifstream file("inputs/day16.txt");
-    while (file >> line)
-    map.push_back(line);
     
     std::vector<std::vector<bool>> energised(map.size(), std::vector<bool>(map[0].size(), false));
     std::set<Beam> history;
 
-    std::vector<Beam> beams(1, Beam {.vel_x = 1, .x = -1});
+    std::vector<Beam> beams(1, Beam {
+        .x = start_x,
+        .y = start_y,
+        .vel_x = (start_x < 0) ? 1 : ((start_x >= map[0].size()) ? -1 : 0),
+        .vel_y = (start_y < 0) ? 1 : ((start_y >= map.size()) ? -1 : 0),
+    });
     while (!beams.empty())
     {
         for (size_t beam_idx = 0; beam_idx < beams.size(); ++beam_idx)
         {
             Beam& beam = beams[beam_idx];
-            if (beam.x >= 0) // i.e. not from the entry spot
+            if (beam.x >= 0 && beam.x < map[0].size() && beam.y >= 0 && beam.y < map.size())
                 energised[beam.y][beam.x] = true;
             
             bool remove = false;
@@ -112,6 +111,31 @@ void aoc::day16()
     size_t energised_total = 0;
     for (const auto& row : energised)
         energised_total += std::count(row.begin(), row.end(), true);
+    return energised_total;
+}
+
+void aoc::day16()
+{
+    std::vector<std::string> map;
+    std::string line;
+  
+    std::ifstream file("inputs/day16.txt");
+    while (file >> line)
+    map.push_back(line);
+    
+    size_t largest_total = 0;
+    const size_t energised_total = count_enegised(map, -1, 0);
+    for (size_t x = 0; x < map[0].size(); ++x)
+    {
+        largest_total = std::max(count_enegised(map, (int)x, -1), largest_total);
+        largest_total = std::max(count_enegised(map, (int)x, (int)map.size()), largest_total);
+    }
+    for (size_t y = 0; y < map.size(); ++y)
+    {
+        largest_total = std::max(count_enegised(map, -1, (int)y), largest_total);
+        largest_total = std::max(count_enegised(map, (int)map[0].size(), (int)y), largest_total);
+    }
     
     std::cout << "Energised total: " << energised_total << std::endl;
+    std::cout << "Largest energised total: " << largest_total << std::endl;
 }
