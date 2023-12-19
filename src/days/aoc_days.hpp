@@ -23,7 +23,7 @@ void day14();
 void day15();
 void day16();
 void day17();
-inline void day18() {}
+void day18();
 inline void day19() {}
 inline void day20() {}
 inline void day21() {}
