@@ -123,6 +123,7 @@
     <ClCompile Include="src\days\day16.cpp" />
     <ClCompile Include="src\days\day17.cpp" />
     <ClCompile Include="src\days\day18.cpp" />
+    <ClCompile Include="src\days\day19.cpp" />
     <ClCompile Include="src\days\day2.cpp" />
     <ClCompile Include="src\days\day3.cpp" />
     <ClCompile Include="src\days\day4.cpp" />

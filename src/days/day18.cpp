@@ -48,17 +48,17 @@ namespace
             current_x += (distance * move_x);
             current_y += (distance * move_y);
             total_length += distance;
-
-            double area = 0;
-            for (size_t i = 0; i < corner_points.size(); ++i)
-            {
-                const int64_t j = (i + 1) % (int64_t)corner_points.size();
-                area += 0.5 * double((corner_points[i].x * corner_points[j].y) - (corner_points[j].x * corner_points[i].y));
-            }
-            area += total_length / 2 + 1;
-
-            return (size_t)area;
         }
+
+        double area = 0;
+        for (size_t i = 0; i < corner_points.size(); ++i)
+        {
+            const int64_t j = (i + 1) % (int64_t)corner_points.size();
+            area += 0.5 * double((corner_points[i].x * corner_points[j].y) - (corner_points[j].x * corner_points[i].y));
+        }
+        area += total_length / 2 + 1;
+
+        return (size_t)area;
     }
 }
 
